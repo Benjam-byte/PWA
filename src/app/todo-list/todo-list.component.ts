@@ -34,7 +34,13 @@ export class TodoListComponent implements OnInit {
     return this._todolistService.observable;
   }
 
-  
+  undo() {
+    this._todolistService.undo();
+  }
+
+  redo() {
+    this._todolistService.redo();
+  }
   
   nbItemRestant(tdlItem:  readonly TodoItem[]): number{
     var rest: number = 0;

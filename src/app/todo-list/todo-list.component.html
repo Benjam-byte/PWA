@@ -29,6 +29,12 @@
             <li>
                 <a (click)="filter=filterCom"  [ngClass]="{selected : filter==filterCom }">Complétés</a>
             </li>
+            <li>
+                <a (click)="undo()">Undo</a>
+            </li>
+            <li>
+                <a (click)="redo()">Redo</a>
+            </li>
         </ul>
         <button class="clear-completed">Supprimer cochées</button>
     </footer>
