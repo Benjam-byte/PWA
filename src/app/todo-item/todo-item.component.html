@@ -1,8 +1,10 @@
+<li [ngClass] = "{editing :isEditing,completed :data.isDone}">
 <div class="view" >
-    <input class="toggle" type="checkbox" name="done" [ngModel]="data.isDone" (click)="isDone(data)" />
-    <label class="label">{{data.label}}</label>
+    <input #newCheckBox class="toggle" type="checkbox" name="done" [ngModel]="data.isDone" (ngModelChange)="isDone({isDone:newCheckBox.checked})" />
+    <label class="label"  (dblclick)="setEditing(true)">{{data.label}}</label>
     <button class="destroy" (click)="delete(data)"></button>
 </div>
-<form (ngSubmit)="label()">
-    <input [appMyFocus]="isFocused"  #newTextInput name="newTextInput" [(ngModel)]="labelValue" class="edit"/>
+<form (ngSubmit)="label({label:newTextInput.value})">
+    <input  #newTextInput (focusout)="setEditing(false)" name="newTextInput" [ngModel]="data.label" class="edit"/>
 </form>
+</li>

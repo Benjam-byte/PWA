@@ -7,11 +7,11 @@
         </form>
     </header>
     <section class="main">
-        <input  class="toggle-all" type="checkbox" name="toggleAll" />
-        <label  (click)="selectAll()" for="toggleAll">Mark all as complete</label>
+        <input  #toggleAll class="toggle-all" type="checkbox" name="toggleAll" /> <!-- [ngModel]="allCheck"-->
+        <label  (click)="selectAll({isDone :!toggleAll.checked })" for="toggleAll">Mark all as complete</label>
         <ul class="todo-list" *ngIf="obsToDoList|async as TDL" >
-            <li  *ngFor="let todo of list; let index = index" (click)="resyncClass(TDL.items,index)" (dblclick)="edit(1,index)" [class]="editing[index]">
-                <app-todo-item  [data]="todo" (remove)="remove($event)" (update)="update($event,todo,index)"></app-todo-item>
+            <li  *ngFor="let todo of TDL.items; let index = index">
+                <app-todo-item  *ngIf="filter(todo)" [data]="todo" (remove)="remove($event)" (update)="update($event,todo)"></app-todo-item>
             </li>
             
         </ul> 
@@ -21,13 +21,13 @@
         </strong> restantes</span>
         <ul class="filters">
             <li>
-                <a (click)="filterTous()" class="filterAll">Tous</a>
+                <a (click)="filter=filterAll" [ngClass]="{selected : filter==filterAll }">Tous</a>
             </li>
             <li>
-                <a (click)="filterActif(true)" class="filterActives">Actifs</a>
+                <a (click)="filter=filterAct" [ngClass]="{selected : filter==filterAct }">Actifs</a>
             </li>
             <li>
-                <a (click)="filterActif(false)"  class="filterCompleted">Complétés</a>
+                <a (click)="filter=filterCom"  [ngClass]="{selected : filter==filterCom }">Complétés</a>
             </li>
         </ul>
         <button class="clear-completed">Supprimer cochées</button>

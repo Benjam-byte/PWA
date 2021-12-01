@@ -1,7 +1,8 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TodoItem, TodoList, TodolistService } from '../todolist.service';
+
+type FctFilter = (item: TodoItem) => boolean;
 
 
 @Component({
@@ -13,45 +14,28 @@ import { TodoItem, TodoList, TodolistService } from '../todolist.service';
 export class TodoListComponent implements OnInit {
 
   public searchValue: string = '';
-  public editing: Array<string> = [];
-  public list: TodoItem[] = [];
-  
+  public filterAll: FctFilter = function (item: TodoItem) {
+    return true;
+  }
 
-  constructor(private _todolistService: TodolistService) { 
-    this.obsToDoList.forEach(e => { this.initClass(e.items) });
-    this.filterTous();
+  public filter: FctFilter = this.filterAll;
+
+  public filterAct: FctFilter= function (item: TodoItem) {
+    return !item.isDone;
+  };
+  public filterCom: FctFilter= function (item: TodoItem) {
+    return item.isDone;
+  };;
+
+    constructor(private _todolistService: TodolistService) { 
   }
 
   get obsToDoList(): Observable<TodoList> {
     return this._todolistService.observable;
   }
 
-  initClass(item: readonly TodoItem[]): void {
-    for (var i: number = 0; i < item.length; i++){
-      this.getCheckedText(item[i], i);
-    }
-  }
-
-
-  resyncClass(item: readonly TodoItem[], ind: number) {
-    if (this.editing[ind] === "editing") {
-      
-    } else {
-      this.initClass(item);
-    }
-  }
-
-
-  getCheckedText(item: Partial<TodoItem>,ind:number) {
-    if (item.isDone) {
-      this.editing[ind] = "completed";
-    } else {
-      this.editing[ind] = "";
-    }
-    return this.editing[ind];
-  }
-
-
+  
+  
   nbItemRestant(tdlItem:  readonly TodoItem[]): number{
     var rest: number = 0;
     for (var i: number = 0; i < tdlItem.length; i++){
@@ -65,12 +49,8 @@ export class TodoListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  edit(v: number,ind :number) {
-    if (v === 0) {
-      this.editing[ind] = "";
-    } else {
-      this.editing[ind]  = "editing";
-    }
+  selectAll(p :Partial<TodoItem>) {
+    
   }
   
   remove(...item: Readonly<TodoItem[]>) {
@@ -90,63 +70,13 @@ export class TodoListComponent implements OnInit {
     this._todolistService.update(d,item);
   }
 
-  update(item:Partial<TodoItem>, item2: Readonly<TodoItem>,ind:number) {
+  update(item:Partial<TodoItem>, item2: Readonly<TodoItem>) {
     this._todolistService.update(item, item2);
-    this.getCheckedText(item, ind);
   }
 
   append(label: string): void{
     this._todolistService.append(label);
     this.searchValue = '';
-  }
-
-  filterTous() {
-    this.obsToDoList.forEach(e => { this.list = e.items.slice(0, e.items.length) });
-    this.initClass(this.list);
-  }
-
-  filterActif(mode : boolean) {
-    this.obsToDoList.forEach(e => { this.list = e.items.slice(0, e.items.length) });
-    var res: TodoItem[] = [];
-    for (var i: number = 0; i<this.list.length; i++){
-      if (mode) {
-        if (!this.list[i].isDone) {
-          res.push(this.list[i]);
-        }
-      } else {
-        if (this.list[i].isDone) {
-          res.push(this.list[i]);
-        }
-      }
-     
-    }
-    this.list = res.slice(0, res.length);
-    this.initClass(this.list);
-  }
-
-  removeFromTab(tab: any, e: any) {
-    var ind = tab.indexOf(e)+1;
-    tab.splice(ind, 1);
-    return tab;
-  }
-
-  selectAll() {
-    var res: boolean = true;
-    for (var i: number = 0; i < this.list.length; i++) { 
-      if (!this.list[i].isDone) {
-        res = false;
-      }
-    }
-    if (res) {
-      for (var i: number = 0; i < this.list.length; i++) { 
-        this.updateDone(false, this.list[i]);
-      }
-    }else {
-      for (var i: number = 0; i < this.list.length; i++) { 
-        this.updateDone(true, this.list[i]);
-      }
-    }
-   
   }
 
 
