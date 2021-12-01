@@ -50,6 +50,13 @@ export class TodolistService {
     return this;
   }
 
+  updateName(label:string):this {
+    const L = this.subj.getValue();
+    const NL = { ...L, label: label };
+    this.subj.next(NL);
+    return this;
+  }
+
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if(data.label !== "") {
       const L = this.subj.getValue();

@@ -7,10 +7,10 @@
         </form>
     </header>
     <section class="main">
-        <input  #toggleAll class="toggle-all" type="checkbox" name="toggleAll" /> <!-- [ngModel]="allCheck"-->
+        <input  #toggleAll class="toggle-all" type="checkbox" name="toggleAll" [ngModel]="allCheck" /> <!-- -->
         <label  (click)="selectAll({isDone :!toggleAll.checked })" for="toggleAll">Mark all as complete</label>
-        <ul class="todo-list" *ngIf="obsToDoList|async as TDL" >
-            <li  *ngFor="let todo of TDL.items; let index = index">
+        <ul class="todo-list"   *ngIf="obsToDoList|async as TDL" >
+            <li *ngFor="let todo of TDL.items; let index = index">
                 <app-todo-item  *ngIf="filter(todo)" [data]="todo" (remove)="remove($event)" (update)="update($event,todo)"></app-todo-item>
             </li>
             
@@ -21,13 +21,13 @@
         </strong> restantes</span>
         <ul class="filters">
             <li>
-                <a (click)="filter=filterAll" [ngClass]="{selected : filter==filterAll }">Tous</a>
+                <a (click)="filter=filterAll;remType=remAll" [ngClass]="{selected : filter==filterAll }">Tous</a>
             </li>
             <li>
-                <a (click)="filter=filterAct" [ngClass]="{selected : filter==filterAct }">Actifs</a>
+                <a (click)="filter=filterAct;remType=remAct" [ngClass]="{selected : filter==filterAct }">Actifs</a>
             </li>
             <li>
-                <a (click)="filter=filterCom"  [ngClass]="{selected : filter==filterCom }">Complétés</a>
+                <a (click)="filter=filterCom;remType=remCom"  [ngClass]="{selected : filter==filterCom }">Complétés</a>
             </li>
             <li>
                 <a (click)="undo()">Undo</a>
@@ -36,6 +36,6 @@
                 <a (click)="redo()">Redo</a>
             </li>
         </ul>
-        <button class="clear-completed">Supprimer cochées</button>
+        <button (click)="remType()" class="clear-completed">Supprimer affichées</button>
     </footer>
 </section>

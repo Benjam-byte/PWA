@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { TodoItem, TodoList, TodolistService } from '../todolist.service';
 
 type FctFilter = (item: TodoItem) => boolean;
-
+type FctRem = () => void;
 
 @Component({
   selector: 'app-todo-list',
@@ -13,11 +13,12 @@ type FctFilter = (item: TodoItem) => boolean;
 })
 export class TodoListComponent implements OnInit {
 
+  public allCheck = true;
+
   public searchValue: string = '';
   public filterAll: FctFilter = function (item: TodoItem) {
     return true;
   }
-
   public filter: FctFilter = this.filterAll;
 
   public filterAct: FctFilter= function (item: TodoItem) {
@@ -25,21 +26,46 @@ export class TodoListComponent implements OnInit {
   };
   public filterCom: FctFilter= function (item: TodoItem) {
     return item.isDone;
-  };;
+  };
 
-    constructor(private _todolistService: TodolistService) { 
+  public remAll: FctRem;
+  public remType! : FctRem
+  public remAct!: FctRem;
+  public remCom!: FctRem;
+
+  constructor(private _todolistService: TodolistService) { 
+
+    this.remCom = function () {
+      let items: Readonly<TodoItem[]> = [];
+      this.obsToDoList.subscribe(result => items = result.items);
+      items.forEach((item) => { if (item.isDone) this.remove(item) })
+    };
+    this.remAll = function () {
+      let items: Readonly<TodoItem[]> = [];
+      this.obsToDoList.subscribe(result => items = result.items);
+      items.forEach((item) => {this.remove(item) })
+    };
+    this.remAct = function () {
+      let items: Readonly<TodoItem[]> = [];
+      this.obsToDoList.subscribe(result => items = result.items);
+      items.forEach((item) => { if (!item.isDone) this.remove(item) })
+    };
+    this.remType = this.remAll;
   }
 
   get obsToDoList(): Observable<TodoList> {
     return this._todolistService.observable;
   }
 
+
   undo() {
     this._todolistService.undo();
+    this.updateChecked();
   }
 
   redo() {
     this._todolistService.redo();
+    this.updateChecked();
   }
   
   nbItemRestant(tdlItem:  readonly TodoItem[]): number{
@@ -53,36 +79,36 @@ export class TodoListComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.updateChecked();
+  }
+
+  updateChecked() {
+    this.allCheck = true;
+    var list: Readonly<TodoItem[]> = [];
+    this.obsToDoList.subscribe(result => list = result.items);
+    list.forEach(item => { if (!item.isDone) this.allCheck = false });
   }
 
   selectAll(p :Partial<TodoItem>) {
-    
+    var list: Readonly<TodoItem[]> = [];
+    this.obsToDoList.subscribe(result => list = result.items);
+    list.forEach(item => { this.update(p, item) });
+    this.updateChecked();
   }
   
   remove(...item: Readonly<TodoItem[]>) {
-    console.log(item);
     this._todolistService.remove(...item);
-    console.log("je remove");
+    this.updateChecked();
   }
-
-  updateLabel(label: string, item: Readonly<TodoItem>,) {
-    console.log(label);
-    var t: Partial<TodoItem> = { label: label };
-    this._todolistService.update(t,item);
-  }
-
-  updateDone(isDone: boolean, item: Readonly<TodoItem>,) {
-    var d : Partial<TodoItem> = { isDone: isDone };
-    this._todolistService.update(d,item);
-  }
-
   update(item:Partial<TodoItem>, item2: Readonly<TodoItem>) {
     this._todolistService.update(item, item2);
+    this.updateChecked();
   }
 
   append(label: string): void{
     this._todolistService.append(label);
     this.searchValue = '';
+    this.updateChecked();
   }
 
 

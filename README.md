@@ -28,10 +28,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 ## fonctionnalite
-undo/redo
-supprByAffichage
+undo/redo done
+supprByAffichage done
+changerLenom 
+TypedList (icon X backGroundColor)
 archiv
 multiListing 
-TypedList (icon X backGroundColor)
 Escalierlist
 LinkedList 
