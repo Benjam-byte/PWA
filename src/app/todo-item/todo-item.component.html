@@ -1,0 +1,8 @@
+<div class="view" >
+    <input class="toggle" type="checkbox" name="done" [ngModel]="data.isDone" (click)="isDone(data)" />
+    <label class="label">{{data.label}}</label>
+    <button class="destroy" (click)="delete(data)"></button>
+</div>
+<form (ngSubmit)="label()">
+    <input [appMyFocus]="isFocused"  #newTextInput name="newTextInput" [(ngModel)]="labelValue" class="edit"/>
+</form>
