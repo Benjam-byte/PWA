@@ -51,6 +51,9 @@ export class TodoListComponent implements OnInit {
       items.forEach((item) => { if (!item.isDone) this.remove(item) })
     };
     this.remType = this.remAll;
+
+    var list: Partial<TodoList>;
+    this.obsToDoList.subscribe(result => list = result);
   }
 
   get obsToDoList(): Observable<TodoList> {
@@ -103,6 +106,10 @@ export class TodoListComponent implements OnInit {
   update(item:Partial<TodoItem>, item2: Readonly<TodoItem>) {
     this._todolistService.update(item, item2);
     this.updateChecked();
+  }
+
+  updateTitle( label: string) {
+    this._todolistService.updateTitle(label);
   }
 
   append(label: string): void{

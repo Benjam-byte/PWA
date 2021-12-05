@@ -9,7 +9,7 @@ export interface TodoItem {
 
 export interface TodoList {
   readonly label: string;
-  readonly items: Readonly< TodoItem[] >;
+  readonly items: Readonly<TodoItem[]>;
 }
 
 let idItem = 0;
@@ -66,6 +66,14 @@ export class TodolistService {
       this.remove(...items);
     }
     return this;
+  }
+
+  updateTitle(label:string): this {
+      const L = this.subj.getValue();
+      const NL = {label :label , items: L.items};
+      this.subj.next(NL);
+      console.log(NL);
+      return this;
   }
 
   undo(): this {

@@ -3,9 +3,11 @@
 }
 
 .panel{
+    background-color: white;
+    border : 1px rgba(128, 128, 128, 0.445) solid;
     display: grid;
     grid-template-columns:repeat(6,1fr);
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 #next1{

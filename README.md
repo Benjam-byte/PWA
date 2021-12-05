@@ -29,6 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## fonctionnalite
 undo/redo done
+effacertout done
 supprByAffichage done
 changerLenom 
 TypedList (icon X backGroundColor)
