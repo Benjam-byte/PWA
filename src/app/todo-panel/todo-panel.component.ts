@@ -9,6 +9,7 @@ import { TodoItem } from '../todolist.service';
 export class TodoPanelComponent implements OnInit {
 
   @Output() update = new EventEmitter<string>();
+  @Output() updateI = new EventEmitter<string>();
 
   constructor() { }
 
@@ -18,6 +19,10 @@ export class TodoPanelComponent implements OnInit {
 
   updateTitle(label:string) {
     this.update.emit(label);
+  }
+
+  updateIcone(nom: string) {
+    this.updateI.emit(nom + ".png");
   }
 
 }

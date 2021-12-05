@@ -1,4 +1,4 @@
-<img src="../../favicon.ico" style="position: absolute;top:50px;left:1000px;max-width: 50px;"/>
+<img *ngIf="obsToDoList|async as TDL" src="assets/icone/{{TDL.icone}}" style="position: absolute;top:50px;left:1000px;max-width: 50px;"/>
 <section class="todoapp">
     <header class="header">
         <h1 *ngIf="obsToDoList|async as TDL"> {{ TDL.label}}</h1>
@@ -41,4 +41,4 @@
     </footer>
 </section>
 <hr />
-<app-todo-panel (update)="updateTitle($event)"></app-todo-panel>
+<app-todo-panel (updateI)="updateIcone($event)" (update)="updateTitle($event)"></app-todo-panel>

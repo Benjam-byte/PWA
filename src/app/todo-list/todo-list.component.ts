@@ -35,6 +35,8 @@ export class TodoListComponent implements OnInit {
 
   constructor(private _todolistService: TodolistService) { 
 
+    console.log(_todolistService);
+
     this.remCom = function () {
       let items: Readonly<TodoItem[]> = [];
       this.obsToDoList.subscribe(result => items = result.items);
@@ -51,9 +53,6 @@ export class TodoListComponent implements OnInit {
       items.forEach((item) => { if (!item.isDone) this.remove(item) })
     };
     this.remType = this.remAll;
-
-    var list: Partial<TodoList>;
-    this.obsToDoList.subscribe(result => list = result);
   }
 
   get obsToDoList(): Observable<TodoList> {
@@ -110,6 +109,10 @@ export class TodoListComponent implements OnInit {
 
   updateTitle( label: string) {
     this._todolistService.updateTitle(label);
+  }
+
+  updateIcone(icone: string) {
+    this._todolistService.updateIcone(icone);
   }
 
   append(label: string): void{
