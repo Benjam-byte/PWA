@@ -1,0 +1,8 @@
+<h1 id="titleacc">List disponible</h1>
+<div id="divacc">
+    <ul  *ngIf="obsToDoList|async as TDL">
+        <li id="liacc" *ngFor="let todo of TDL.list;let index = index">
+            <a routerLinkActive="active" routerLink="list/{{index}}" ><app-todo-viz [data]=todo ></app-todo-viz></a>
+        </li>
+    </ul>
+</div>

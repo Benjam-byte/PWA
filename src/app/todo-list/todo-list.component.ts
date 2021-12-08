@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TodoItem, TodoList, TodolistService } from '../todolist.service';
 
@@ -33,10 +34,7 @@ export class TodoListComponent implements OnInit {
   public remAct!: FctRem;
   public remCom!: FctRem;
 
-  constructor(private _todolistService: TodolistService) { 
-
-    console.log(_todolistService);
-
+  constructor(private _todolistService: TodolistService,private route: ActivatedRoute) { 
     this.remCom = function () {
       let items: Readonly<TodoItem[]> = [];
       this.obsToDoList.subscribe(result => items = result.items);
@@ -53,6 +51,11 @@ export class TodoListComponent implements OnInit {
       items.forEach((item) => { if (!item.isDone) this.remove(item) })
     };
     this.remType = this.remAll;
+  }
+
+  ngOnInit(): void {
+    this.updateChecked();
+    this.route.params.subscribe(params => { console.log(params); this._todolistService.changeCurrent(params.id) } );
   }
 
   get obsToDoList(): Observable<TodoList> {
@@ -80,9 +83,6 @@ export class TodoListComponent implements OnInit {
     return rest;
   }
   
-  ngOnInit(): void {
-    this.updateChecked();
-  }
 
   updateChecked() {
     this.allCheck = true;
