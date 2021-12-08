@@ -11,12 +11,14 @@
 }
 
 #next1{
+    justify-self: left;
     height:100%;
     grid-column : 1;
     grid-row-start: 1;
     grid-row-end : 4;
 }
 #next2{
+    justify-self: right;
     height : 100%;
     grid-column : 6;
     grid-row-start: 1;

@@ -15,6 +15,7 @@ export interface TodoList {
 
 export interface TodoListception {
   readonly list: Readonly<TodoList[]>;
+
 }
 
 let idItem = 0;
@@ -35,25 +36,22 @@ export class TodolistService {
   private futures: TodoList[] = [];
 
   constructor() {
-    this.managePersistency(true);
-    this.manageUndoRedo();
+    this.managePersistency2();
+    this.manageUndoRedo2();
   }
 
-  changeCurrent(id: number) {
-    this.current = this.subj2.getValue().list[id];
+
+  changeCurrent(id : number) {
     idList = id;
+    this.managePersistency2();
+    this.manageUndoRedo2();
+    this.current = this.current2.list[idList];
     this.subj.next(this.current);
-    console.log(this.subj);
-    this.previous = [];
-    this.futures = [];
-    this.managePersistency(false);
-    this.manageUndoRedo();
   }
 
-  append(...labels: Readonly<string[]>): this {
+  append2(...labels: Readonly<string[]>): this {
     const L: TodoList = this.subj.getValue();
-    this.subj.next({
-      ...L,
+    this.subj.next({...L,
       items: [
         ...L.items,
         ...labels.filter(l => l !== '').map(
@@ -64,14 +62,43 @@ export class TodolistService {
     return this;
   }
 
+  append(...labels: Readonly<string[]>): this {
+    const L: TodoList = this.subj2.getValue().list[idList];
+    const N: TodoListception = this.subj2.getValue();
+    this.subj2.next({
+      list: [...N.list.filter(n => N.list.indexOf(n) === idList),{...L,
+        items: [
+          ...L.items,
+          ...labels.filter(l => l !== '').map(
+            label => ({ label, isDone: false, id: idItem++ })
+          )
+        ]
+      }]
+    });
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
   remove(...items: Readonly<TodoItem[]>): this {
+    const L = this.subj2.getValue().list[idList];
+    const N = this.subj2.getValue();
+    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { ...L, items: L.items.filter(item => items.indexOf(item) === -1) }] };
+    this.subj2.next(NL);
+
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
+  remove2(...items: Readonly<TodoItem[]>): this {
     const L = this.subj.getValue();
     const NL = { ...L, items: L.items.filter(item => items.indexOf(item) === -1) };
     this.subj.next(NL);
     return this;
   }
 
-  update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
+  update2(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if (data.label !== "") {
       const L = this.subj.getValue();
       const NL = { ...L, items: L.items.map(item => items.indexOf(item) >= 0 ? { ...item, ...data } : item) };
@@ -82,49 +109,120 @@ export class TodolistService {
     return this;
   }
 
-  updateTitle(label: string): this {
+  update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
+    if (data.label !== "") {
+      const L = this.subj2.getValue().list[idList];
+      const N = this.subj2.getValue();
+
+      const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { ...L, items: L.items.map(item => items.indexOf(item) >= 0 ? { ...item, ...data } : item) }] };
+      this.subj2.next(NL);
+    } else {
+      this.remove(...items);
+    }
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
+  updateTitle2(label: string): this {
     const L = this.subj.getValue();
     const NL = { label: label, items: L.items, icone: L.icone };
     this.subj.next(NL);
     return this;
   }
 
-  updateIcone(icone: string): this {
+  updateTitle(label: string): this {
+    const L = this.subj2.getValue().list[idItem];
+    const N = this.subj2.getValue();
+
+    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { label: label, items: L.items, icone: L.icone }] };
+    this.subj2.next(NL);
+
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
+  updateIcone2(icone: string): this {
     const L = this.subj.getValue();
     const NL = { label: L.label, items: L.items, icone: icone };
     this.subj.next(NL);
     return this;
   }
 
-  undo(): this {
+  updateIcone(icone: string): this {
+    const L = this.subj2.getValue().list[idItem];
+    const N = this.subj2.getValue();
+
+    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { label: L.label, items: L.items, icone: icone }] };
+    this.subj2.next(NL);
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
+  undo(): this { //a faire pour eviter que je puisse undo dans une autre list que celle ou je suis actuellement 
     if (this.previous.length > 0) {
       this.subj.next(this.previous[this.previous.length - 1]);
     }
     return this;
   }
 
-  redo(): this {
+  redo(): this {  //a faire pour eviter que je puisse undo dans une autre list que celle ou je suis actuellement 
     if (this.futures.length > 0) {
       this.subj.next(this.futures[this.futures.length - 1]);
     }
     return this;
   }
 
-
-  private managePersistency(mode: boolean) {
-    if (mode) {
-      const str = localStorage.getItem('TDL_L3_MIAGE');
-      if (str && str !== tdlToString(this.current)) {
-        this.subj.next(strToTdl(str));
-      }
-    } else {
-      const str = localStorage.getItem('TDL_L3_MIAGE');
-      if (str && str !== tdlToString(this.current)) {
-        localStorage.setItem('TDL_L3_MIAGE', tdlToString(this.current));
-      }
+  private managePersistency() {
+    const str = localStorage.getItem('TDL_L3_MIAGE');
+    if (str && str !== tdlToString(this.current)) {
+      this.subj.next(strToTdl(str));
     }
   }
 
+  private managePersistency2() {
+    const str = localStorage.getItem('TDL_L3_MIAGE');
+    if (str && str !== tdlToString2(this.current2)) {
+      this.subj2.next(strToTdl2(str));
+    }
+  }
+
+  private manageUndoRedo2() {
+    this.observable2.subscribe(tdl => {
+      if (tdl !== this.current2) {
+        localStorage.setItem('TDL_L3_MIAGE', tdlToString2(tdl));
+        // Undo-redo
+        var tdl2 = tdl.list[idList];
+        const indexInPrevious = this.previous.indexOf(tdl2);
+        if (indexInPrevious >= 0) { // Is it a previous version of the list ?
+          const L = this.previous.splice(indexInPrevious, this.previous.length);
+          this.futures.push(this.current2.list[idList], ...L.reverse());
+          this.futures.pop(); // On enlève la liste courante
+        } else {
+          const indexInFutures = this.futures.indexOf(tdl2);
+          if (indexInFutures >= 0) { // Is it a future version of the list ?
+            const L = this.futures.splice(indexInFutures, this.futures.length);
+            this.previous.push(this.current2.list[idList], ...L.reverse());
+            this.previous.pop();
+          } else {
+            // This is a new version
+            if (this.futures.length) {
+              const L = [...this.futures, this.current2.list[idList]];
+              const RL = [...L].reverse().map(TDL => ({ ...TDL }));
+              RL.pop();
+              this.previous.push(...RL, ...L);
+            } else {
+              this.previous.push(this.current2.list[idList]);
+            }
+            this.futures = [];
+          }
+        }
+        this.current2 = tdl;
+      }
+    });
+  }
 
   private manageUndoRedo() {
     this.observable.subscribe(tdl => {
