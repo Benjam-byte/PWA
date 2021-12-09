@@ -18,4 +18,8 @@ export class TodoAcceuilComponent implements OnInit {
     return this._todolistService.observable2;
   }
 
+  appendList() {
+    this._todolistService.appendList();
+  }
+
 }

@@ -19,7 +19,7 @@ export interface TodoListception {
 }
 
 let idItem = 0;
-let idList = 1;
+var idList : number = 1;
 
 @Injectable({
   providedIn: 'root'
@@ -41,8 +41,9 @@ export class TodolistService {
   }
 
 
-  changeCurrent(id : number) {
-    idList = id;
+  changeCurrent(id : string) {
+    idList = parseInt(id);
+    console.log(idList);
     this.managePersistency2();
     this.manageUndoRedo2();
     this.current = this.current2.list[idList];
@@ -62,30 +63,30 @@ export class TodolistService {
     return this;
   }
 
+
   append(...labels: Readonly<string[]>): this {
-    const L: TodoList = this.subj2.getValue().list[idList];
     const N: TodoListception = this.subj2.getValue();
     this.subj2.next({
-      list: [...N.list.filter(n => N.list.indexOf(n) === idList),{...L,
+      list: [...N.list.filter(n => N.list.indexOf(n) === idList).map(tdl => ({...tdl,
         items: [
-          ...L.items,
+          ...tdl.items,
           ...labels.filter(l => l !== '').map(
             label => ({ label, isDone: false, id: idItem++ })
           )
         ]
-      }]
+      })),...N.list.filter(j => N.list.indexOf(j) !== idList),]
     });
+    idList = 0;
     this.current = this.current2.list[idList];
     this.subj.next(this.current);
     return this;
   }
 
   remove(...items: Readonly<TodoItem[]>): this {
-    const L = this.subj2.getValue().list[idList];
-    const N = this.subj2.getValue();
-    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { ...L, items: L.items.filter(item => items.indexOf(item) === -1) }] };
-    this.subj2.next(NL);
+    const N : TodoListception= this.subj2.getValue();
+    this.subj2.next({ list: [...N.list.filter(n => N.list.indexOf(n) === idList).map(tdl => ({ ...tdl, items: tdl.items.filter(item => items.indexOf(item) === -1) })),...N.list.filter(j => N.list.indexOf(j) !== idList),] });
 
+    idList = 0;
     this.current = this.current2.list[idList];
     this.subj.next(this.current);
     return this;
@@ -111,14 +112,15 @@ export class TodolistService {
 
   update(data: Partial<TodoItem>, ...items: Readonly<TodoItem[]>): this {
     if (data.label !== "") {
-      const L = this.subj2.getValue().list[idList];
       const N = this.subj2.getValue();
 
-      const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { ...L, items: L.items.map(item => items.indexOf(item) >= 0 ? { ...item, ...data } : item) }] };
+      const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList).map(tdl => ({ ...tdl, items: tdl.items.map(item => items.indexOf(item) >= 0 ? { ...item, ...data } : item) })),...N.list.filter(j => N.list.indexOf(j) !== idList),] };
       this.subj2.next(NL);
     } else {
       this.remove(...items);
     }
+
+    idList = 0;
     this.current = this.current2.list[idList];
     this.subj.next(this.current);
     return this;
@@ -132,12 +134,12 @@ export class TodolistService {
   }
 
   updateTitle(label: string): this {
-    const L = this.subj2.getValue().list[idItem];
     const N = this.subj2.getValue();
 
-    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { label: label, items: L.items, icone: L.icone }] };
+    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList).map(tdl => ({ label: label, items: tdl.items, icone: tdl.icone })),...N.list.filter(j => N.list.indexOf(j) !== idList),] };
     this.subj2.next(NL);
 
+    idList = 0;
     this.current = this.current2.list[idList];
     this.subj.next(this.current);
     return this;
@@ -151,15 +153,30 @@ export class TodolistService {
   }
 
   updateIcone(icone: string): this {
-    const L = this.subj2.getValue().list[idItem];
     const N = this.subj2.getValue();
 
-    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList), { label: L.label, items: L.items, icone: icone }] };
+    const NL = { list: [...N.list.filter(n => N.list.indexOf(n) === idList).map(tdl => ({ label: tdl.label, items: tdl.items, icone: icone })),...N.list.filter(j => N.list.indexOf(j) !== idList),] };
     this.subj2.next(NL);
+
+    idList = 0;
     this.current = this.current2.list[idList];
     this.subj.next(this.current);
     return this;
   }
+
+  appendList(): this{
+    const N: TodoListception = this.subj2.getValue();
+    this.subj2.next({list : [
+      ...N.list, { label: "newList",items:[],icone:""}
+    ]
+    });
+    this.current2 = this.subj2.getValue();
+    idList = 0;
+    this.current = this.current2.list[idList];
+    this.subj.next(this.current);
+    return this;
+  }
+
 
   undo(): this { //a faire pour eviter que je puisse undo dans une autre list que celle ou je suis actuellement 
     if (this.previous.length > 0) {
