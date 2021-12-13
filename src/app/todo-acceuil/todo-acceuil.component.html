@@ -1,9 +1,22 @@
-<h1 id="titleacc">List disponible</h1>
+<ul class="title">
+    <li [ngClass]="{editing :isEditing}">
+        <div class="view">
+            <label class="label2" (dblclick)="setEditing(true)">{{name}}</label>
+        </div>
+        <form (ngSubmit)="updateTitle(newTitleInput.value)">
+            <input #newTitleInput (focusout)="setEditing(false)" name="newTitleInput" [ngModel]="name" class="edit2" />
+        </form>
+    </li>
+</ul>
+
+<p id="infoList">Dernière liste consultée :</p>
 <div id="divacc">
-    <ul  *ngIf="obsToDoList|async as TDL">
+    <ul *ngIf="obsToDoList|async as TDL">
         <li id="liacc" *ngFor="let todo of TDL.list;let index = index">
-            <a routerLinkActive="active" routerLink="list/{{index}}" ><app-todo-viz [data]=todo ></app-todo-viz></a>
+            <a routerLinkActive="active" routerLink="list/{{index}}">
+                <app-todo-viz [data]=todo></app-todo-viz>
+            </a>
         </li>
     </ul>
 </div>
-<input style="margin-left:90%;" type="button" value="New" (click)="appendList()"/>
+<p id="new" (click)="appendList()">+</p>

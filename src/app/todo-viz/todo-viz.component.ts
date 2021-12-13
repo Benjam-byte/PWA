@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TodoItem, TodoList } from '../todolist.service';
+import { TodoItem, TodoList, TodolistService } from '../todolist.service';
 
 @Component({
   selector: 'app-todo-viz',
@@ -10,11 +10,14 @@ export class TodoVizComponent implements OnInit {
 
   @Input() data!: TodoList;
 
-  constructor() { }
+  constructor(private _todolistService: TodolistService) { }
 
   ngOnInit(): void {
   }
 
+  remove() {
+    this._todolistService.removeList(this.data);
+  }
   nbItemRestant(tdlItem:  readonly TodoItem[]): number{
     var rest: number = 0;
     for (var i: number = 0; i < tdlItem.length; i++){
