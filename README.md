@@ -33,7 +33,9 @@ Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
   -  Il comporte un input pour modifier le titre de la liste. *(output : update())*<br/>
   -  Il comporte un input pour modifier l'icone de la liste. *(output : updateI())*<br/>
 
-![Image todo-pannel](https://mitnoos.com/read.me/todo-pannel.PNG)
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todo-pannel.PNG" />
+</p>
 
 ### Le Service :ballot_box_with_check:
 
@@ -71,7 +73,6 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
   -  Les **todo-viz** sont affichées dans l'ordre croissant de leur date de modification. <br/>
   -  Un bouton permet de créer une nouvelle liste.<br/>
 
-![Image todo-acceuil](https://mitnoos.com/read.me/todoacceuil.PNG)
 <p align="center">
   <img src="https://mitnoos.com/read.me/todoacceuil.PNG" />
 </p>
@@ -91,7 +92,9 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
   -  L'icone est modifiable en cas de doubleClick. <br/>
   -  Un bouton retour est ajouter en haut de la liste. <br/>
 
-![Image todo-list](https://mitnoos.com/read.me/todolist.PNG)
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todolist.PNG" />
+</p>
 
 ### Todo-item :ballot_box_with_check:
 
