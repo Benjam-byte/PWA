@@ -72,6 +72,10 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
   -  Un bouton permet de créer une nouvelle liste.<br/>
 
 ![Image todo-acceuil](https://mitnoos.com/read.me/todoacceuil.PNG)
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todoacceuil.PNG" />
+</p>
+
 
 ### Todo-viz :ballot_box_with_check:
 
