@@ -71,6 +71,8 @@ Ce composant affiche *n* **todo-viz** avec *n* étant le nombre de liste au sein
 Les **todo-viz** sont affichées dans l'ordre croissant de leur date de modification. <br/>
 Un bouton permet de créer une nouvelle liste.<br/>
 
+![Image todo-acceuil](https://mitnoos.com/read.me/todoacceuil.PNG)
+
 ### Todo-viz 
 
 On créer un nouveau composant enfants servant à afficher une partie des informations d'une liste.<br/>
@@ -84,6 +86,8 @@ Le composant **todo-pannel** est retiré. <br/>
 Le titre est modifiable en cas de doubleClick.<br/>
 L'icone est modifiable en cas de doubleClick. <br/>
 Un bouton retour est ajouter en haut de la liste. <br/>
+
+![Image todo-list](https://mitnoos.com/read.me/todolist.PNG)
 
 ### Todo-item 
 
