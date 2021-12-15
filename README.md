@@ -8,19 +8,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Version 1
 
-Cette version est une version amélioré du tp3 proposé.
+Cette version est une version améliorée du tp3 proposé.
 
 ### Architecture 
-Un composant **todo-list**
-Un composant **todo-item**
-Un composant **todo-pannel**
+Un composant **todo-list**<br/>
+Un composant **todo-item**<br/>
+Un composant **todo-pannel**<br/>
 
 Le composant **todo-list** est le composant parent du composant **todo-item** et du composant **todo-pannel**
 
 ### Todo-list 
 
 Le undo/redo est ajouté et fonctionnelle.<br/>
-Supprimé tous deviens supprimé affiché. supprimant tous ce qui est affiché par le filtre choisis ex : filtre = completed alors tous les completed sont supprimé. <br/>
+Supprimer tous deviens supprimer affiché. supprimant tous ce qui est affiché par le filtre choisit ex : filtre = completed alors tous les completed sont supprimés. <br/>
 Un icone est affiché à coté du titre de la liste. <br/>
 
 ### Todo-item
@@ -40,40 +40,40 @@ On ajoute deux fonctions une pour update le titre et une pour update l'icone d'u
 
 ### Assets 
 
-Un dossier icone est ajouté contenant 9 icone de base il n'est pas possible pour l'utilisateur d'en rajouter de lui même. 
+Un dossier icone est ajouté contenant 9 icones de base. Il n'est pas possible pour l'utilisateur d'en rajouter de lui même. 
 
 
 ## Version multi list (2)
 
-Dans cette version on souhaite cette fois-ci avoir accés a plusieurs list, les créer et les gerer de la mêmes manieres que precedemments. 
+Dans cette version on souhaite cette fois-ci avoir accés à plusieurs listes, les créer et les gérér de la mêmes manieres que precedemments. 
 
 ### Architecture 
-Un composant **todo-list**
-Un composant **todo-item**
+Un composant **todo-list**<br/>
+Un composant **todo-item**<br/>
 
 Le composant **todo-list** est le composant parent du composant **todo-item** 
 
-Un composant **todo-acceuil**
-Un composant **todo-viz**
+Un composant **todo-acceuil**<br/>
+Un composant **todo-viz**<br/>
 
 Le composant **todo-acceuil** est le composant parent du composant **todo-viz**
 
 ### Routing
-On creer un router pour pouvoir se deplacer entre les deux composants parents **todo-list** et **todo-acceuil**. Une route par default pour revenir sur le **todo-acceuil** et une route parametrique pour se deplacer au sein des différentes listes avec un id. 
+On créer un router pour pouvoir se deplacer entre les deux composants parents **todo-list** et **todo-acceuil**. Une route par default pour revenir sur le **todo-acceuil** et une route parametrique pour se deplacer au sein des différentes listes avec un id. 
 
 ### Todo-accueil
 
 On créer un nouveau composant parent servant de *page d'acceuil* à notre projet. <br/>
 Le titre de ce composant est modifiable en cas de doubleclick <br/>
 Ce composant affiche *n* **todo-viz** avec *n* étant le nombre de liste au sein de notre localstorage. <br/>
-Les **todo-viz** sont affiché dans l'ordre de croissant de leur date de modification. <br/>
+Les **todo-viz** sont affichées dans l'ordre croissant de leur date de modification. <br/>
 Un bouton permet de créer une nouvelle liste.<br/>
 
 ### Todo-viz 
 
 On créer un nouveau composant enfants servant à afficher une partie des informations d'une liste.<br/>
 Ce composant affiche le titre de la liste.<br/>
-Ce composant affiche le nombre d'item restant non complétes.<br/>
+Ce composant affiche le nombre d'items restant non complétés.<br/>
 Ce composant comporte un bouton de suppréssion de la liste pour laquelle il est affiché. <br/>
 
 ### Todo-list 
@@ -89,15 +89,15 @@ Pas de modification.
 
 ### Le service 
 
-On stocke dans le localStorage une **todolistception**, il faut donc le transformé pour que tous fonctionnne. On obtiens deux objets "current", un pour la **todolistception** et l'autre pour la **todo-list** manipulé par l'utilisateur. <br/>
+On stocke dans le localStorage une **todolistception**, il faut donc la transformer pour que tous fonctionnne. On obtiens deux objets "current", un pour la **todolistception** et l'autre pour la **todo-list** manipulée par l'utilisateur. <br/>
 
-Une interface **todoListception** est créer représentant un tableau de **todo-list**. <br/>
-Les fonctions update/remove/append sont modifiés pour permettre de conserver leur fonctionnalités mais au sein d'une todolistCeption<br/>
-Les fonctions les fonctions managepersistency et manageUndoRedo sont modifié pour les mêmes raisons. <br/>
-Les fonction appendList , updateTilteList et removeList sont ajoutés. <br/>
-Une fonction changeCurrent est ajoutés pour permetre au service de modifié l'observable en fonction de la list affiché à l'utilisateurs. <br/>
+Une interface **todoListception** est crée représentant un tableau de **todo-list**. <br/>
+Les fonctions update/remove/append sont modifiées pour permettre de conserver leurs fonctionnalités mais au sein d'une **todolistception**<br/>
+les fonctions managepersistency et manageUndoRedo sont modifiées pour les mêmes raisons. <br/>
+Les fonction appendList , updateTilteList et removeList sont ajoutées. <br/>
+Une fonction changeCurrent est ajoutée pour permetre au service de modifier l'observable en fonction de la list affichée à l'utilisateurs. <br/>
 
 
 ### Problème rencontré
-Le format avec un seul localstorage contenant toutes les listes complexifie l'utilisation du undo/redo et ce n'est plus disponible sur la version multilist. 
+Le format avec un seul localstorage contenant toutes les listes complexifie l'utilisation du *undo/redo* et ce n'est plus disponible sur la version multilist. 
 
