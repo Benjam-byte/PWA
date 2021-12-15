@@ -40,6 +40,7 @@ export class TodoAcceuilComponent implements OnInit {
 
   updateTitle(label: string) {
     this._todolistService.updtateListName(label);
+    this.setEditing(false);
   }
 
 }

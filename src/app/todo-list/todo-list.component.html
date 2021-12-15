@@ -2,7 +2,7 @@
     style="position: absolute;top:6%;left:36%;max-width: 100px;max-height:100px;transform: scaleX(-1);"><img
         src="assets/share.png" style="position: absolute;top:6%;left:36%;max-width: 50px" /></a>
 <div [ngClass]="{editingImg : isImg}">       
-<img class="iconeImg" *ngIf="obsToDoList|async as TDL" src="assets/icone/{{TDL.icone}}" style="position: absolute;top:6%;left:63%;max-width: 50px;" (click)="setEditingImg(true)"/>
+<img class="iconeImg" *ngIf="obsToDoList|async as TDL" src="assets/icone/{{TDL.icone}}" style="position: absolute;top:6%;left:63%;max-width: 50px;" (dblclick)="setEditingImg(true)"/>
 <select class="selectImg" name="logo" style="position: absolute;top:6%;left:63%"  >
     <option (click)="updateIcone('nuage.png')" value="nuage">nuage</option>
     <option (click)="updateIcone('calendrier.png')" value="calendrier">calendrier</option>

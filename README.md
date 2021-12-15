@@ -2,38 +2,50 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
-## Development server
+## Lancer le projet
+`npm i` 
+`ng serve`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Fonctionnalité implémenté
 
-## Code scaffolding
+### Version 1
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+La version 1 comporte le tp3 complet ainsi que les fonctionnalités suivantes fonctionnelles : 
+-undo/redo
+-supprimer par affichage, permet de supprimer tout ce qui est affiché par les filtres donc si tout le filtre est "completed" supprimer tous supprimeras tous les completés
+-un nouveau composant nommé todo-pannel pour modifier le nom d'une liste et l'icone de la liste.
+-la liste comporte maintenant un icone, on peu le choisir parmis 9 existant
+-Le service comporte donc un nouveau type de todolist et deux nouvelles fonction updateIcone et updateTitle
 
 
-## fonctionnalite
-undo/redo done
-effacertout done
-supprByAffichage done
-changerLenom done
-TypedList (icon )done
-multiListing 
-Escalierlist
-LinkedList 
-archiv
+### Version multi list
+
+On ajoute une interface todolistception qui représente un tableau de todolist et seras stocké dans le localservice.
+
+On creer un nouveau composant nommé todo-acceuil représentant la page contenant l'affichage des todolist disponible. 
+
+On creer ensuite des routes pour liéer la page d'acceuil et les listes. Les routes des listes sont paramétriques avec un id pour afficher la bonne list. 
+-une fonction changeCurrent est ajouter dans le service pour suivre la liste selectionner par une route paramétriques. 
+
+On creer un nouveau composant pour gerer l'affichage des listes dans todo-acceuil nommé todo-viz.
+
+Une todo-viz comporte le nom de la liste une croix pour la supprimer ainsi que le nombre d'élements restant d'une liste. 
+
+Dans le service toutes les fonctions sont modifié pour permettre d'accepter le nouveau format de données. Le localStorage contient alors une list de todolist
+  -les fonctons append/remove/update de todolist sont modifié
+  -les fonctions managepersistency et manageUndoRedo sont modifié 
+
+Un bouton pour ajouter des listes et créer dans le todo-acceuil et une fonction dans le service appendList est rajouter. 
+
+Un bouton de suppréssion d'une listes et créer et integrer au composant todo-viz avec une fonction dans le service nommé removeList. 
+
+Un bouton pour remonter d'une liste au todo-acceuil est ajouter. 
+
+On souhaite supprimer le todo-pannel pour garder l'interface de base donc les titres d'une todolist et les icones deviennent en cas de doubleclick modifiable. On conserve ainsi la logique de la liste. 
+
+On réalise une manoeuvre similaire pour que le titre affiché dans todo-acceuil soit modifiable de la même maniere. 
+-une fonction updateTitleList est ajouter au service
+
+#### Problème rencontré
+Le format avec un seul localstorage contenant toutes les listes complexifie l'utilisation du undo/redo et ce n'est plus disponible sur la version multilist. 
+
