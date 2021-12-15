@@ -1,0 +1,54 @@
+
+.editing {
+    border-bottom: none;
+    padding: 0;
+  }
+  
+  .editing .edit3 {
+    display: block;
+    width: calc(100% - 43px);
+    padding: 12px 16px;
+    margin: 0 0 0 0;
+  }
+  
+  .editing .view3 {
+    display: none;
+  }
+
+  .edit3 {
+    display: none;
+  }
+
+
+.edit3{
+    position: absolute;
+    top: -155px;
+    width: 80%;
+    font-size: 100px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(175, 47, 47, 0.15);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+}
+
+.editingImg .selectImg{
+    display: block;
+}
+
+.editingImg .iconeImg{
+    display: none;
+}
+
+.selectImg{
+    display : none;
+}
+
+.iconeImg{
+    display:block;
+}
+
+.iconeImg:hover{
+  cursor: pointer;
+}

@@ -2,38 +2,118 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
-## Development server
+## Lancer le projet
+`npm i` 
+`ng serve`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Version 1 :memo:
 
-## Code scaffolding
+Cette version est une version améliorée du tp3 proposé.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Architecture :ballot_box_with_check:
+  -  Un composant **todo-list**<br/>
+  -  Un composant **todo-item**<br/>
+  -  Un composant **todo-panel**<br/>
 
-## Build
+Le composant **todo-list** est le composant parent du composant **todo-item** et du composant **todo-panel**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Todo-list :ballot_box_with_check:
 
-## Running unit tests
+  -  Le undo/redo est ajouté et fonctionnelle.<br/>
+  -  Supprimer tous deviens supprimer affiché. supprimant tous ce qui est affiché par le filtre choisit ex : filtre = completed alors tous les completed sont supprimés. <br/>
+  -  Un icone est affiché à coté du titre de la liste. <br/>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Todo-item :ballot_box_with_check:
 
-## Running end-to-end tests
+Pas d'ajout de fonctionnalité par rapport au tp3 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Todo-panel :ballot_box_with_check:
 
-## Further help
+Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
+  -  Il comporte un input pour modifier le titre de la liste. *(output : update())*<br/>
+  -  Il comporte un input pour modifier l'icone de la liste. *(output : updateI())*<br/>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todo-pannel.PNG" />
+</p>
+
+### Le Service :ballot_box_with_check:
+
+  -  On modifie l'interface todo-list pour y intégrer un icone. <br/>
+  -  On ajoute deux fonctions une pour update le titre et une pour update l'icone d'une liste.
+
+### Assets :art:
+
+Un dossier icone est ajouté contenant 9 icones de base. Il n'est pas possible pour l'utilisateur d'en rajouter de lui même. 
 
 
-## fonctionnalite
-undo/redo done
-effacertout done
-supprByAffichage done
-changerLenom 
-TypedList (icon X backGroundColor)
-archiv
-multiListing 
-Escalierlist
-LinkedList 
+## Version multi list (2) :trophy:
+
+Dans cette version on souhaite cette fois-ci avoir accés à plusieurs listes, les créer et les gérér de la mêmes manieres que precedemments. 
+
+### Architecture :ballot_box_with_check:
+  -  Un composant **todo-list**<br/>
+  -  Un composant **todo-item**<br/>
+
+Le composant **todo-list** est le composant parent du composant **todo-item** 
+
+  -  Un composant **todo-acceuil**<br/>
+  -  Un composant **todo-viz**<br/>
+
+Le composant **todo-acceuil** est le composant parent du composant **todo-viz**
+
+### Routing :ballot_box_with_check:
+On créer un router pour pouvoir se deplacer entre les deux composants parents **todo-list** et **todo-acceuil**. Une route par default pour revenir sur le **todo-acceuil** et une route parametrique pour se deplacer au sein des différentes listes avec un id. 
+
+### Todo-accueil :ballot_box_with_check:
+
+  -  On créer un nouveau composant parent servant de *page d'acceuil* à notre projet. <br/>
+  -  Le titre de ce composant est modifiable en cas de doubleclick <br/>
+  -  Ce composant affiche *n* **todo-viz** avec *n* étant le nombre de liste au sein de notre localstorage. <br/>
+  -  Les **todo-viz** sont affichées dans l'ordre croissant de leur date de modification. <br/>
+  -  Un bouton permet de créer une nouvelle liste.<br/>
+
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todoacceuil.PNG" />
+</p>
+
+
+### Todo-viz :ballot_box_with_check:
+
+  -  On créer un nouveau composant enfants servant à afficher une partie des informations d'une liste.<br/>
+  -  Ce composant affiche le titre de la liste.<br/>
+  -  Ce composant affiche le nombre d'items restant non complétés.<br/>
+  -  Ce composant comporte un bouton de suppréssion de la liste pour laquelle il est affiché. <br/>
+
+### Todo-list :ballot_box_with_check:
+
+  -  Le composant **todo-panel** est retiré. <br/>
+  -  Le titre est modifiable en cas de doubleClick.<br/>
+  -  L'icone est modifiable en cas de doubleClick. <br/>
+  -  Un bouton retour est ajouter en haut de la liste. <br/>
+
+<p align="center">
+  <img src="https://mitnoos.com/read.me/todolist.PNG" />
+</p>
+
+### Todo-item :ballot_box_with_check:
+
+Pas de modification. 
+
+### Le service :ballot_box_with_check:
+
+On stocke dans le localStorage une **todolistception**, il faut donc la transformer pour que tous fonctionnne. On obtiens deux objets "current", un pour la **todolistception** et l'autre pour la **todo-list** manipulée par l'utilisateur. <br/>
+
+  -  Une interface **todoListception** est crée représentant un tableau de **todo-list**. <br/>
+  -  Les fonctions update/remove/append sont modifiées pour permettre de conserver leurs fonctionnalités mais au sein d'une **todolistception**<br/>
+  -  les fonctions managepersistency et manageUndoRedo sont modifiées pour les mêmes raisons. <br/>
+  -  Les fonction appendList , updateTilteList et removeList sont ajoutées. <br/>
+  -  Une fonction changeCurrent est ajoutée pour permetre au service de modifier l'observable en fonction de la list affichée à l'utilisateurs. <br/>
+
+
+### Problème rencontré :closed_lock_with_key:
+Le format avec un seul localstorage contenant toutes les listes complexifie l'utilisation du *undo/redo* et ce n'est plus disponible sur la version multilist. 
+
+
+
+

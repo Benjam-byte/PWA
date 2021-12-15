@@ -1,0 +1,59 @@
+#boxviz{
+    border : 1px #d9d9d9 solid;
+    background-color: white;
+    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    text-decoration: none !important;
+    position: relative;
+    min-height: 100px;
+}
+
+#titleviz{
+    text-align: center;
+    text-decoration: none !important;
+    font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4em;
+    color: #4d4d4d;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top : 10%;
+}
+
+#nbviz{
+    margin:0;
+    padding: 0;
+    text-align: right;
+    color : grey;
+    text-decoration: none !important;
+}
+
+#delete{
+    text-align: right;
+}
+
+router-link{
+    text-decoration: none;
+}
+
+.destroy2 {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+    margin:  0;
+    font-size: 30px;
+    color: #cc9a9a;
+    background-color: white;
+    border : none;
+  }
+  
+ .destroy2:hover {
+    color: #af5b5e;
+    cursor: pointer;
+  }
+  
+  
