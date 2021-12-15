@@ -27,7 +27,7 @@ Le composant **todo-list** est le composant parent du composant **todo-item** et
 
 Pas d'ajout de fonctionnalité par rapport au tp3 
 
-### Todo-pannel :ballot_box_with_check:
+### Todo-panel :ballot_box_with_check:
 
 Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
   -  Il comporte un input pour modifier le titre de la liste. *(output : update())*<br/>
