@@ -13,9 +13,9 @@ Cette version est une version améliorée du tp3 proposé.
 ### Architecture :ballot_box_with_check:
   -  Un composant **todo-list**<br/>
   -  Un composant **todo-item**<br/>
-  -  Un composant **todo-pannel**<br/>
+  -  Un composant **todo-panel**<br/>
 
-Le composant **todo-list** est le composant parent du composant **todo-item** et du composant **todo-pannel**
+Le composant **todo-list** est le composant parent du composant **todo-item** et du composant **todo-panel**
 
 ### Todo-list :ballot_box_with_check:
 
@@ -87,7 +87,7 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
 
 ### Todo-list :ballot_box_with_check:
 
-  -  Le composant **todo-pannel** est retiré. <br/>
+  -  Le composant **todo-panel** est retiré. <br/>
   -  Le titre est modifiable en cas de doubleClick.<br/>
   -  L'icone est modifiable en cas de doubleClick. <br/>
   -  Un bouton retour est ajouter en haut de la liste. <br/>
