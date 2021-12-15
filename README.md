@@ -33,7 +33,7 @@ Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
 Il comporte un input pour modifier le titre de la liste. *(output : update())*<br/>
 Il comporte un input pour modifier l'icone de la liste. *(output : updateI())*<br/>
 
-![Image todo-pannel](https://mitnoos.com/read.me/todo-pannel.png)
+![Image todo-pannel](https://mitnoos.com/read.me/todo-pannel.PNG)
 
 ### Le Service
 
