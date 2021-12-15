@@ -10,24 +10,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Cette version est une version améliorée du tp3 proposé.
 
-### Architecture 
+### Architecture :ballot_box_with_check:
   -  Un composant **todo-list**<br/>
   -  Un composant **todo-item**<br/>
   -  Un composant **todo-pannel**<br/>
 
 Le composant **todo-list** est le composant parent du composant **todo-item** et du composant **todo-pannel**
 
-### Todo-list 
+### Todo-list :ballot_box_with_check:
 
   -  Le undo/redo est ajouté et fonctionnelle.<br/>
   -  Supprimer tous deviens supprimer affiché. supprimant tous ce qui est affiché par le filtre choisit ex : filtre = completed alors tous les completed sont supprimés. <br/>
   -  Un icone est affiché à coté du titre de la liste. <br/>
 
-### Todo-item
+### Todo-item :ballot_box_with_check:
 
 Pas d'ajout de fonctionnalité par rapport au tp3 
 
-### Todo-pannel
+### Todo-pannel :ballot_box_with_check:
 
 Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
   -  Il comporte un input pour modifier le titre de la liste. *(output : update())*<br/>
@@ -35,12 +35,12 @@ Nouveau composant affiché en dessous du contenu de **Todo-list**.<br/>
 
 ![Image todo-pannel](https://mitnoos.com/read.me/todo-pannel.PNG)
 
-### Le Service
+### Le Service :ballot_box_with_check:
 
   -  On modifie l'interface todo-list pour y intégrer un icone. <br/>
   -  On ajoute deux fonctions une pour update le titre et une pour update l'icone d'une liste.
 
-### Assets 
+### Assets :art:
 
 Un dossier icone est ajouté contenant 9 icones de base. Il n'est pas possible pour l'utilisateur d'en rajouter de lui même. 
 
@@ -49,7 +49,7 @@ Un dossier icone est ajouté contenant 9 icones de base. Il n'est pas possible p
 
 Dans cette version on souhaite cette fois-ci avoir accés à plusieurs listes, les créer et les gérér de la mêmes manieres que precedemments. 
 
-### Architecture 
+### Architecture :ballot_box_with_check:
   -  Un composant **todo-list**<br/>
   -  Un composant **todo-item**<br/>
 
@@ -60,10 +60,10 @@ Le composant **todo-list** est le composant parent du composant **todo-item**
 
 Le composant **todo-acceuil** est le composant parent du composant **todo-viz**
 
-### Routing
+### Routing :ballot_box_with_check:
 On créer un router pour pouvoir se deplacer entre les deux composants parents **todo-list** et **todo-acceuil**. Une route par default pour revenir sur le **todo-acceuil** et une route parametrique pour se deplacer au sein des différentes listes avec un id. 
 
-### Todo-accueil
+### Todo-accueil :ballot_box_with_check:
 
   -  On créer un nouveau composant parent servant de *page d'acceuil* à notre projet. <br/>
   -  Le titre de ce composant est modifiable en cas de doubleclick <br/>
@@ -73,14 +73,14 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
 
 ![Image todo-acceuil](https://mitnoos.com/read.me/todoacceuil.PNG)
 
-### Todo-viz 
+### Todo-viz :ballot_box_with_check:
 
   -  On créer un nouveau composant enfants servant à afficher une partie des informations d'une liste.<br/>
   -  Ce composant affiche le titre de la liste.<br/>
   -  Ce composant affiche le nombre d'items restant non complétés.<br/>
   -  Ce composant comporte un bouton de suppréssion de la liste pour laquelle il est affiché. <br/>
 
-### Todo-list 
+### Todo-list :ballot_box_with_check:
 
   -  Le composant **todo-pannel** est retiré. <br/>
   -  Le titre est modifiable en cas de doubleClick.<br/>
@@ -89,11 +89,11 @@ On créer un router pour pouvoir se deplacer entre les deux composants parents *
 
 ![Image todo-list](https://mitnoos.com/read.me/todolist.PNG)
 
-### Todo-item 
+### Todo-item :ballot_box_with_check:
 
 Pas de modification. 
 
-### Le service 
+### Le service :ballot_box_with_check:
 
 On stocke dans le localStorage une **todolistception**, il faut donc la transformer pour que tous fonctionnne. On obtiens deux objets "current", un pour la **todolistception** et l'autre pour la **todo-list** manipulée par l'utilisateur. <br/>
 
