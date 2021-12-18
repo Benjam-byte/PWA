@@ -1,0 +1,41 @@
+<section class="todoapp">
+    <header class="header">
+      <h1 *ngIf="obsToDoList|async as TDL">{{ TDL.label}}</h1>
+      <form (ngSubmit)="append(lab.value)">
+        <input [(ngModel)]="searchValue" name="newTodoInput" class="new-todo" placeholder="Que faire?" autofocus #lab />
+    </form>
+    </header>
+    <section class="main">
+        <input #toggleAll class="toggle-all" type="checkbox" name="toggleAll" [ngModel]="allCheck" /> 
+        <label (click)="selectAll({isDone :!toggleAll.checked })" for="toggleAll">Mark all as complete</label>
+        <ul class="todo-list" *ngIf="obsToDoList|async as TDL">
+            <li *ngFor="let todo of TDL.items; let index = index">
+                <app-todo-item *ngIf="filter(todo)" [data]="todo" (remove)="remove($event)"
+                    (update)="update($event,todo)"></app-todo-item>
+            </li>
+
+        </ul>
+    </section>
+    <footer class="footer" style='padding-bottom: 30px;'>
+        <span class="todo-count" *ngIf="obsToDoList|async as TDL"><strong>{{ nbItemRestant(TDL.items) }}
+            </strong> restantes</span>
+        <ul class="filters">
+            <li>
+                <a (click)="filter=filterAll;remType=remAll" [ngClass]="{selected : filter==filterAll }">Tous</a>
+            </li>
+            <li>
+                <a (click)="filter=filterAct;remType=remAct" [ngClass]="{selected : filter==filterAct }">Actifs</a>
+            </li>
+            <li>
+                <a (click)="filter=filterCom;remType=remCom" [ngClass]="{selected : filter==filterCom }">Complétés</a>
+            </li>
+            <li>
+                <a (click)="undo()">Undo</a>
+            </li>
+            <li>
+                <a (click)="redo()">Redo</a>
+            </li>
+        </ul>
+        <button (click)="remType()" class="clear-completed">Supprimer affichées</button>
+    </footer>
+  </section>

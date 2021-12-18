@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { TodoListComponent } from '../component/todo-list/todo-list.component';
+import { TodoItemComponent } from '../component/todo-item/todo-item.component';
 
 
 @NgModule({
@@ -14,6 +16,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,TodoListComponent,TodoItemComponent]
 })
 export class HomePageModule {}
