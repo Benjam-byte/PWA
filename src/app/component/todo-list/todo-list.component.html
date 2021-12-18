@@ -1,12 +1,35 @@
+<div [ngClass]="{editingImg : isImg}" >    
+<img class="iconeImg" *ngIf="obsToDoList|async as TDL" src="../../../assets/icone/{{TDL.icone}}"
+            style="max-width: 50px;left : 460px;top:40px;position:absolute;z-index: 3;" (dblclick)="setEditingImg(true)"/>
+            <select class="selectImg" name="logo" style="left : 460px;top:50px;position:absolute;z-index: 3"  >
+                <option (click)="updateIcone('nuage.png')" value="nuage">nuage</option>
+                <option (click)="updateIcone('calendrier.png')" value="calendrier">calendrier</option>
+                <option (click)="updateIcone('dossier.png')" value="dossier">dossier</option>
+                <option (click)="updateIcone('editer.png')" value="editer">editer</option>
+                <option (click)="updateIcone('point.png')" value="point">localisation</option>
+                <option (click)="updateIcone('linternet.png')" value="linternet">internet</option>
+                <option (click)="updateIcone('reseau.png')" value="reseau">social</option>
+                <option (click)="updateIcone('maison.png')" value="maison">maison</option>
+            </select>
+            </div> 
 <section class="todoapp">
     <header class="header">
-      <h1 *ngIf="obsToDoList|async as TDL">{{ TDL.label}}</h1>
-      <form (ngSubmit)="append(lab.value)">
-        <input [(ngModel)]="searchValue" name="newTodoInput" class="new-todo" placeholder="Que faire?" autofocus #lab />
-    </form>
+        <div [ngClass]="{editing :isEditing}">
+            <div class="view3">
+                <h1 class="inputTitle" *ngIf="obsToDoList|async as TDL" (dblclick)="setEditing(true)"> {{ TDL.label}}</h1>
+            </div>
+            <form (ngSubmit)="updateTitle(newTextInput.value)">
+                <input #newTextInput (focusout)="setEditing(false)" name="newTextInput" [(ngModel)]="name"
+                    class="edit3" />
+            </form>
+        </div>
+        <form (ngSubmit)="append(lab.value)">
+            <input [(ngModel)]="searchValue" name="newTodoInput" class="new-todo" placeholder="Que faire?" autofocus
+                #lab />
+        </form>
     </header>
     <section class="main">
-        <input #toggleAll class="toggle-all" type="checkbox" name="toggleAll" [ngModel]="allCheck" /> 
+        <input #toggleAll class="toggle-all" type="checkbox" name="toggleAll" [ngModel]="allCheck" />
         <label (click)="selectAll({isDone :!toggleAll.checked })" for="toggleAll">Mark all as complete</label>
         <ul class="todo-list" *ngIf="obsToDoList|async as TDL">
             <li *ngFor="let todo of TDL.items; let index = index">
@@ -38,4 +61,4 @@
         </ul>
         <button (click)="remType()" class="clear-completed">Supprimer affichées</button>
     </footer>
-  </section>
+</section>

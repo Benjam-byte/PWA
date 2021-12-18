@@ -125,8 +125,19 @@ export class TodoListComponent implements OnInit {
     }
   }
 
+  updateTitle( label: string) {
+    this._todolistService.updateTitle(label);
+    this.setEditing(false);
+  }
+
+  updateIcone(icone: string) {
+    this._todolistService.updateIcone(icone);
+    this.setEditingImg(false);
+  }
+
   setEditingImg(e: boolean) {
     this.isImg = e;
+    console.log('mdr');
   }
 
 }

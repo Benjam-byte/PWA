@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'todopage',
+    loadChildren: () => import('./todopage/todopage.module').then( m => m.TodopagePageModule)
+  },
 ];
 
 @NgModule({
