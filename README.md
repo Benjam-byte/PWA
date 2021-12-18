@@ -117,12 +117,12 @@ Le format avec un seul localstorage contenant toutes les listes complexifie l'ut
 
 ## Version ionic multi list (3) :trophy:
 
-Dans cette version on souhaite cette fois-ci réalisé l'application sous ionic on reprend donc l'ensemble des fonctionnalités de la version multi list.
+Dans cette version on souhaite cette fois-ci réaliser l'application sous ionic. On repart de zéro au sein d'un nouveau projet et recrée l'ensemble des fonctionnalités de la version précédentes.
 
 ### Architecture :ballot_box_with_check:
 
-On retrouve une architecture ce composent similaire a la version multi list simplement on rajoute deux pages a notres projets.
-Une page home et une page list. L'une contient les composant **todo-acceuil** et **todo-viz** et l'autre contenant **todo-list** et **todo-item**. 
+On retrouve une architecture de composant similaire à la version multi list, simplement on rajoute deux pages à notre projet.
+Une page home et une page liste. L'une contient les composant **todo-acceuil** et **todo-viz** et l'autre contenant **todo-list** et **todo-item**. 
 
 ### Problème rencontré :closed_lock_with_key:
 Comprendre le format ionic et l'utilisation de composant au sein de page fut le plein long. On pourrait rajouter aussi qu'il a fallut réadapter le css car ionic possède une certaine quantité de scss prédifinis lors de la création d'un projet même "blank". 
