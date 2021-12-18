@@ -7,6 +7,10 @@
     min-height: 100px;
 }
 
+#boxviz :hover{
+    cursor: pointer;
+}
+
 #titleviz{
     text-align: center;
     text-decoration: none !important;
@@ -39,7 +43,7 @@ router-link{
 
 .destroy2 {
     position: absolute;
-    top: 0;
+    top: 5px;
     right: 10px;
     bottom: 0;
     width: 40px;

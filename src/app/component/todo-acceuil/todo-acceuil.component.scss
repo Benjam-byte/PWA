@@ -63,6 +63,10 @@ router-link{
   transition: color 0.4s;
 }
 
+.label2:hover{
+  cursor: pointer;
+}
+
 .title li.editing {
     border-bottom: none;
     padding: 0;

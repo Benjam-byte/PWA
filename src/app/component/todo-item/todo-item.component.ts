@@ -41,7 +41,6 @@ export class TodoItemComponent implements OnInit {
   
   delete(data :TodoItem) {
     this.remove.emit(data);
-    console.log(data);
   }
 
   ngOnInit(): void {

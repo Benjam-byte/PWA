@@ -126,3 +126,9 @@ Une page home et une page liste. L'une contient les composant **todo-acceuil** e
 
 ### Problème rencontré :closed_lock_with_key:
 Comprendre le format ionic et l'utilisation de composant au sein de page fut le plein long. On pourrait rajouter aussi qu'il a fallut réadapter le css car ionic possède une certaine quantité de scss prédifinis lors de la création d'un projet même "blank". 
+
+### Hébergement :fireworks:
+Hébérgé ou comment souffrir 1h30 gratuitement à cause de path mal configuré... 
+
+Le projet est disponible ici : https://mitnoos.com/todolist 
+

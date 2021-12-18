@@ -44,7 +44,6 @@ export class TodolistService {
 
   changeCurrent(id : string) {
     idList = parseInt(id);
-    console.log(idList);
     this.managePersistency2();
     this.manageUndoRedo2();
     this.current = this.current2.list[idList];

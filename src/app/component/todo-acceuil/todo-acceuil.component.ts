@@ -19,7 +19,6 @@ export class TodoAcceuilComponent implements OnInit {
 
   ngOnInit(): void {
     this.obsToDoList.subscribe(res => this.name = res.name);
-    console.log(this.name);
   }
 
   get obsToDoList(): Observable<TodoListception> {

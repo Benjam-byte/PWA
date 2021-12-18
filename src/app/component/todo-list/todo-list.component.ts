@@ -61,7 +61,7 @@ export class TodoListComponent implements OnInit {
 
  ngOnInit(): void {
   this.updateChecked();
-  this.route.params.subscribe(params => { console.log(params); this._todolistService.changeCurrent(params.id) });
+  this.route.params.subscribe(params => {this._todolistService.changeCurrent(params.id) });
   this.obsToDoList.subscribe(res => this.name = res.label);
  }
 
@@ -141,7 +141,6 @@ export class TodoListComponent implements OnInit {
 
   setEditingImg(e: boolean) {
     this.isImg = e;
-    console.log('mdr');
   }
 
 }
