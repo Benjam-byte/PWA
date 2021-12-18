@@ -1,3 +1,22 @@
-<p>
-  todo-acceuil works!
-</p>
+<section class="todoap">
+  <ul class="title">
+    <li [ngClass]="{editing :isEditing}">
+      <div class="view">
+        <label class="label2" (dblclick)="setEditing(true)">{{name}}</label>
+      </div>
+      <form (ngSubmit)="updateTitle(newTitleInput.value)">
+        <input #newTitleInput (focusout)="setEditing(false)" name="newTitleInput" [ngModel]="name" class="edit2" />
+      </form>
+    </li>
+  </ul>
+
+  <p id="infoList">Dernière liste consultée :</p>
+  <div id="divacc">
+    <ul *ngIf="obsToDoList|async as TDL">
+      <li id="liacc" *ngFor="let todo of TDL.list;let index = index">
+        <app-todo-viz [data]=todo routerLink="todopage/{{index}}"></app-todo-viz>
+      </li>
+    </ul>
+  </div>
+  <p id="new" (click)="appendList()">+</p>
+</section>

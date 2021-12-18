@@ -1,0 +1,116 @@
+#titleacc{
+    font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  color: rgba(243, 11, 11, 0.15);
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+}
+
+#infoList{
+    font-size: 24px;
+}
+
+#divacc{
+    overflow-y: scroll;
+    max-height: 400px;
+    min-height: 400px;
+    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    list-style:none;
+    margin-left:0;
+    padding-left:0;
+}
+
+router-link{
+    text-decoration: none;
+}
+
+#new{
+    margin-left :80%;
+    margin-top:0;
+    padding-top: 15px;
+    font-size: 100px;
+  font-weight: 100;
+  color: rgba(243, 11, 11, 0.15);
+  background-color: white;
+  width : 80px;
+  height: 50px;
+  text-align: center;
+  border-radius: 100%;
+  cursor : pointer;
+}
+
+#new:hover{
+    color : red;
+}
+
+.label2{
+    font-size: 100px;
+  font-weight: 100;
+  text-align: center;
+  color: rgba(243, 11, 11, 0.15);
+  -webkit-text-rendering: optimizeLegibility;
+  -moz-text-rendering: optimizeLegibility;
+  text-rendering: optimizeLegibility;
+  word-break: break-all;
+  padding: 15px 15px 15px 60px;
+  display: block;
+  line-height: 1.2;
+  transition: color 0.4s;
+}
+
+.title li.editing {
+    border-bottom: none;
+    padding: 0;
+  }
+  
+  .title li.editing .edit2 {
+    display: block;
+    width: calc(100% - 43px);
+    padding: 12px 16px;
+    margin: 0 0 0 43px;
+  }
+  
+  .title li.editing .view {
+    display: none;
+  }
+
+  .title li .edit2 {
+    display: none;
+    font-size: 100px;
+    font-weight: 100;
+    text-align: center;
+    color: rgba(243, 11, 11, 0.15);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+  }
+
+.edit2{
+  position: relative;
+  margin: 0;
+  width: 100%;
+  font-size: 24px;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 1.4em;
+  color: inherit;
+  padding: 6px;
+  border: 1px solid #999;
+  box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.todoap{
+  min-width: 230px;
+  max-width: 550px;
+  background: #fff;
+  margin: 130px 0 40px 0;
+  position: relative;
+}

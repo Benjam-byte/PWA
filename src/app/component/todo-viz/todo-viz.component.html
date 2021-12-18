@@ -1,3 +1,6 @@
-<p>
-  todo-viz works!
-</p>
+<div id="boxviz">
+ <input type="button" class="destroy2"  value="x" (click)="remove()" />
+  <h2 id="titleviz">{{data.label}}</h2>
+  <p id="nbviz">nombre restant : {{ nbItemRestant(data.items) }}</p>
+</div>
+

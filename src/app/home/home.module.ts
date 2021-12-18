@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { TodoAcceuilComponent } from '../component/todo-acceuil/todo-acceuil.component';
+import { TodoVizComponent } from '../component/todo-viz/todo-viz.component';
 
 
 
@@ -15,6 +17,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,TodoAcceuilComponent,TodoVizComponent]
 })
 export class HomePageModule {}

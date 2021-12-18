@@ -12,7 +12,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'todopage',
+    path: 'home/todopage/:id',
     loadChildren: () => import('./todopage/todopage.module').then( m => m.TodopagePageModule)
   },
 ];

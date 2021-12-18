@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TodoItem, TodoList, TodolistService } from '../../todolist.service';
 
@@ -39,7 +40,7 @@ export class TodoListComponent implements OnInit {
   public remAct!: FctRem;
   public remCom!: FctRem;
 
-  constructor(private _todolistService: TodolistService) {
+  constructor(private _todolistService: TodolistService,private route: ActivatedRoute) {
     this.remCom = function () {
       let items: Readonly<TodoItem[]> = [];
       this.obsToDoList.subscribe(result => items = result.items);
@@ -58,8 +59,11 @@ export class TodoListComponent implements OnInit {
     this.remType = this.remAll;
   }
 
-  ngOnInit(): void {
-  }
+ ngOnInit(): void {
+  this.updateChecked();
+  this.route.params.subscribe(params => { console.log(params); this._todolistService.changeCurrent(params.id) });
+  this.obsToDoList.subscribe(res => this.name = res.label);
+ }
 
   get obsToDoList(): Observable<TodoList> {
     return this._todolistService.observable;
