@@ -3,8 +3,11 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
 ## Lancer le projet
+
 `npm i` 
-`ng serve`
+`ionic serve`
+
+**Problème possible** le package-lock.json est en version 2.0 il est possible que ceci empêche le lancement d'un serveur local (ce n'est pas une erreur cela fonctionne trés bien chez moi). Dans ce cas, pour observer le résultat il est hébergé ici : https://mitnoos.com/todolist 
 
 ## Version 1 :memo:
 
